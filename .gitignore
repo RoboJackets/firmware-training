@@ -1,0 +1,4 @@
+# ignore LaTeX files
+*.aux
+*.synctex.gz
+*.out
