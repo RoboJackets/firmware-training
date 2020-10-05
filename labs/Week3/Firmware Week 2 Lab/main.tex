@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{flafter}
+\geometry{letterpaper, portrait, margin=1in}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,
+    urlcolor=blue,
+}
+
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\usepackage{tcolorbox}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{indentfirst}
+
+\newcommand{\ans}{$\rule{1.5cm}{0.15mm}$}
+
+\title{RoboJackets Firmware Training Week 3 Lab Guide}
+\author{Marine Maisonneuve, Logan Schick}
+\date{\today\\v1.0}
+
+\begin{document}
+\maketitle{}
+\setcounter{tocdepth}{2}
+\tableofcontents
+\pagebreak
+
+%Everything below is for you to edit. Code above sets up the general formatting for the document
+
+\section{Background}
+    \subsection{Topics}
+        The important topics being discussed this week in lab include datasheets, registers, and Pulse-Width Modulation (PWM).
+        
+    \subsection{Premise}
+        The lab premise is to use a push button change the brightness of a LED. This system will use interrupts to change PWM registers to control the power output.
+        
+    \subsection{ATMega328P Microcontroller}
+        The Arduino Uno is based on ATMega328P microcontroller which has 3 timer setup controlled using timer registers. We can therefore look at the \href{https://www.sparkfun.com/datasheets/Components/SMD/ATMega328.pdf}{datasheet} for the microcontroller to figure out the values for those control registers. To save a bit of time skip to Section 12-15 (specifically Section 15) which explains the timer you’ll be controlling in the lab. To complete the lab the only required readings are the register descriptions for the timers, but other sections such as modes of operation will give a better understanding of what these timers can do.
+        
+    \subsection{Simulation}
+        If you are using a simulation instead of the hardware, do not worry.  The steps are exactly the same. Go to the TinkerCAD link and you will see the circuit that is a subset of the the hardware. The Arduino you see will be what you use, with the LEDs and buttons replicated as they would be on the actual board.
+        
+        \begin{figure}[ht]
+            \centering
+            \includegraphics[width = 0.7\textwidth]{images/TinkerCADWires.png}
+            \caption{The circuit window of TinkerCAD for this project}
+        \end{figure}
+        
+        \begin{figure}[ht]
+            \centering
+            \includegraphics[width = 0.7\textwidth]{images/TinkerCadCode.png}
+            \caption{The area which you can use to select your target and compile}
+        \end{figure}
+        
+\section{Materials}
+\begin{itemize}
+	\item \href{https://www.autodesk.com/education/edu-software/overview}{AutoDesk Education Account}
+	\item \href{https://www.tinkercad.com/things/aeAzdEiZjZr}{TinkerCAD}
+\end{itemize}
+\section{Objectives}
+    \subsection{Task 1 - Setup}
+        \begin{enumerate}
+            \item Use the \href{https://www.sparkfun.com/datasheets/Components/SMD/ATMega328.pdf}{datasheet} to fill in the empty values in the \texttt{setup()} function.
+            \begin{itemize}
+                \item Output compare can be inverting or non-inverting.
+                \item The desired timer mode is Fast PWM. The prescaler can be any valid configuration.
+                \item Note the way the value of the output compare register is set.
+            \end{itemize}
+            \item Fill in TCCR2A value.
+            \begin{itemize}
+                \item Set bits based on the composition given at the top of Section 15.11.1 of the datasheet.
+                \item For information on setting the output compare mode, refer to Section 15.11.1 Table 15-3.
+                \item For information on setting the timer mode refer to Section 15.11.1 Table 15-8.
+            \end{itemize}
+            \item Fill in TCCR2B value.
+            \begin{itemize}
+                \item Set  bits based on the composition given at the top of Section 15.11.2 of the datasheet.
+                \item For information on setting the prescaler, refer to Section 15.11.2 Table 15-9.
+                \item Once you get the lab up and running try it with the voltage monitor and different prescalers to see how changing the prescaler affects the output.
+            \end{itemize}
+             \item Composition of OCR2A is in Section 15.11.4.
+        \end{enumerate}
+    \subsection{Task 2 - Create Interrupt}
+        \begin{enumerate}
+            \item Have the interrupt method increment the value that goes into the output compare register.
+            \begin{itemize}
+                \item Note that when using fast PWM the 8 bit output compare register takes in a value from 0 to 255.
+                \item Values higher will overflow losing bits above 8, so you may want to account for that.
+                \item Set up the interrupt to trigger when the button is pushed.
+            \end{itemize}
+        \end{enumerate}
+        
+\section{Troubleshooting}
+    \subsection{Solutions}
+    We have included the solutions below if you do not complete the lab during the session or if you want to verify your answer. If you need help during the lab ask an instructor!
+\begin{itemize}
+    \item \href{https://www.tinkercad.com/things/juqsfPwatRF}{TinkerCAD Solution}
+    \end{itemize}
+\end{document}
