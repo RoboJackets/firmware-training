@@ -75,6 +75,53 @@
 	\item \href{https://www.tinkercad.com/things/16XnuyNUjCb}{TinkerCAD}
 \end{itemize}
 
+\section{Relevant Information}
+    \subsection{MPU-6050} \label{readwrite}
+        The MPU-6050 is an Inertial Measurement Unit (\href{https://en.wikipedia.org/wiki/Inertial_measurement_unit}{IMU}) which is mounted to the training board by means of a breakout board (the smaller PCB).  
+        In order to control it, first familiarize yourself with the register map found \href{https://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf}{here}.
+        
+        As per the datasheet, communicating with this involves interacting with the internal read/write pointer of the microcontroller. \\
+        
+        \noindent If you wish to write to a particular register, the following steps must be taken:
+        \begin{enumerate}
+            \item Begin a transmission (\texttt{Wire.beginTransmission(DEV\_ADDR)}).
+            \item Send the address of the register you wish to write to (\texttt{Wire.write(REG\_ADDR)}).
+            \item Send the value you wish to write to the register (\texttt{Wire.write(VALUE})).
+            \item End the transmission (\texttt{Wire.endTransmission()}).
+        \end{enumerate}
+        \noindent A similar process can be followed for reading from registers:
+        \begin{enumerate}
+            \item Begin a transmission (\texttt{Wire.beginTransmission(DEV\_ADDR)}).
+            \item Send the address of the register you wish to start reading from (\texttt{Wire.write(REG\_ADDR)}).
+            \item End the transmission (\texttt{Wire.endTransmission()}).
+            \item Request a number of bytes you want to receive (\texttt{Wire.requestFrom(DEV\_ADDR, BYTES, true)}).
+            \item Read in the bytes, repeating for the number of bytes to be read (\texttt{Wire.read()})
+        \end{enumerate}
+    \subsection{Important MPU-6050 Registers}\label{registers}
+        The particular registers we use in this lab are the following: 
+        \begin{itemize}
+            \item \texttt{PWR\_MGMT\_1} - Turns on device
+            \item \texttt{WHO\_AM\_I} - Identifies device
+            \item \texttt{ACCEL\_XOUT\_H} - Accelerometer X, high 8 bits 
+            \item \texttt{ACCEL\_XOUT\_L} - Accelerometer X, low 8 bits 
+            \item \texttt{ACCEL\_YOUT\_H} - Accelerometer Y, high 8 bits
+            \item \texttt{ACCEL\_YOUT\_L} - Accelerometer Y, low 8 bits 
+            \item \texttt{ACCEL\_ZOUT\_H} - Accelerometer Z, high 8 bits
+            \item \texttt{ACCEL\_ZOUT\_L} - Accelerometer Z, low 8 bits 
+            \item \texttt{ACCEL\_CONFIG} - contains scaling between bits and g-force
+        \end{itemize}
+        
+        A good practice for readability is to reference these registers by name in the code. To do this, first fill out \texttt{\#define} statements which will represent the hexadecimal values of the registers as readable words. For example, the statement \texttt{\#define PWR\_MGMT\_1 0x6b} gives the text \texttt{PWR\_MGMT\_1} a value of \texttt{0x6b} in the code.  
+        
+    \subsection{\texttt{Wire} Library}
+        The library we will be using for I2C communication is the \texttt{Wire} Library. You can refer to the reference page \href{https://www.arduino.cc/en/reference/wire}{here} for understanding the necessary functions along with examples.
+        
+        \begin{figure}[ht]
+            \centering
+            \includegraphics[width = 1.0\textwidth]{img/WireLibrary.PNG}
+            \caption{\texttt{Wire} Library on the Arduino website}
+        \end{figure}
+        
 \section{Lab Objectives}
     \subsection{Task 1 - Get the IMU to turn on}
 
@@ -135,53 +182,6 @@
         \end{enumerate}
     
 
-\section{Relevant Information}
-    \subsection{MPU-6050} \label{readwrite}
-        The MPU-6050 is an Inertial Measurement Unit (\href{https://en.wikipedia.org/wiki/Inertial_measurement_unit}{IMU}) which is mounted to the training board by means of a breakout board (the smaller PCB).  
-        In order to control it, first familiarize yourself with the register map found \href{https://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf}{here}.
-        
-        As per the datasheet, communicating with this involves interacting with the internal read/write pointer of the microcontroller. \\
-        
-        \noindent If you wish to write to a particular register, the following steps must be taken:
-        \begin{enumerate}
-            \item Begin a transmission (\texttt{Wire.beginTransmission(DEV\_ADDR)}).
-            \item Send the address of the register you wish to write to (\texttt{Wire.write(REG\_ADDR)}).
-            \item Send the value you wish to write to the register (\texttt{Wire.write(VALUE})).
-            \item End the transmission (\texttt{Wire.endTransmission()}).
-        \end{enumerate}
-        \noindent A similar process can be followed for reading from registers:
-        \begin{enumerate}
-            \item Begin a transmission (\texttt{Wire.beginTransmission(DEV\_ADDR)}).
-            \item Send the address of the register you wish to start reading from (\texttt{Wire.write(REG\_ADDR)}).
-            \item End the transmission (\texttt{Wire.endTransmission()}).
-            \item Request a number of bytes you want to receive (\texttt{Wire.requestFrom(DEV\_ADDR, BYTES, true)}).
-            \item Read in the bytes, repeating for the number of bytes to be read (\texttt{Wire.read()})
-        \end{enumerate}
-    \subsection{Important MPU-6050 Registers}\label{registers}
-        The particular registers we use in this lab are the following: 
-        \begin{itemize}
-            \item \texttt{PWR\_MGMT\_1} - Turns on device
-            \item \texttt{WHO\_AM\_I} - Identifies device
-            \item \texttt{ACCEL\_XOUT\_H} - Accelerometer X, high 8 bits 
-            \item \texttt{ACCEL\_XOUT\_L} - Accelerometer X, low 8 bits 
-            \item \texttt{ACCEL\_YOUT\_H} - Accelerometer Y, high 8 bits
-            \item \texttt{ACCEL\_YOUT\_L} - Accelerometer Y, low 8 bits 
-            \item \texttt{ACCEL\_ZOUT\_H} - Accelerometer Z, high 8 bits
-            \item \texttt{ACCEL\_ZOUT\_L} - Accelerometer Z, low 8 bits 
-            \item \texttt{ACCEL\_CONFIG} - contains scaling between bits and g-force
-        \end{itemize}
-        
-        A good practice for readability is to reference these registers by name in the code. To do this, first fill out \texttt{\#define} statements which will represent the hexadecimal values of the registers as readable words. For example, the statement \texttt{\#define PWR\_MGMT\_1 0x6b} gives the text \texttt{PWR\_MGMT\_1} a value of \texttt{0x6b} in the code.  
-        
-    \subsection{\texttt{Wire} Library}
-        The library we will be using for I2C communication is the \texttt{Wire} Library. You can refer to the reference page \href{https://www.arduino.cc/en/reference/wire}{here} for understanding the necessary functions along with examples.
-        
-        \begin{figure}[ht]
-            \centering
-            \includegraphics[width = 1.0\textwidth]{img/WireLibrary.PNG}
-            \caption{\texttt{Wire} Library on the Arduino website}
-        \end{figure}
-        
 \section{Troubleshooting}
     \subsection{Solutions}
     We have included the solutions below if you do not complete the lab during the session or if you want to verify your answer. If you need help during the lab ask an instructor!
