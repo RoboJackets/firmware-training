@@ -23,8 +23,8 @@
 \newcommand{\ans}{$\rule{1.5cm}{0.15mm}$}
 
 \title{RoboJackets Firmware Training Week 4 Lab Guide}
-\author{Varun Madabushi, Joe Spall}
-\date{\today\\v1.0}
+\author{Varun Madabushi, Joe Spall, edited by Andrew Roach}
+\date{\today\\v1.1}
 
 \begin{document}
 \maketitle{}
@@ -38,7 +38,7 @@
     \subsection{Topics}
         The important topics being discussed this week in lab include communication protocols (specifically I2C), register mapping on datasheets, and sensors.
     \subsection{Premise}
-        The lab premise is to use a training board with a mounted MPU-6050 sensor to detect \href{https://en.wikipedia.org/wiki/G-force}{g-force}. This \href{https://upload.wikimedia.org/wikipedia/en/f/f5/G-Force_poster.jpg}{g-force} can be used to determine what angle the training board is held. This angle will then be used to determine which 5 controllable LEDs will light up on-board, acting like a \href{https://en.wikipedia.org/wiki/Spirit_level}{bubble level indicator}.
+        The lab premise is to use a training board with a mounted MPU-6050 sensor to detect \href{https://en.wikipedia.org/wiki/G-force}{g-force}. This \href{https://upload.wikimedia.org/wikipedia/en/f/f5/G-Force_poster.jpg}{g-force} can be used to determine what angle the training board is held. This angle will then be used to determine which of the 5 controllable LEDs will light up on-board, acting like a \href{https://en.wikipedia.org/wiki/Spirit_level}{bubble level indicator}.
     \subsection{Inertial Measurement}
         Inertial Measurement Units (IMUs) are a type of sensor that respond to changes in force applied to them. These consist of Accelerometers (which measure linear force) and Gyroscopes (which measure rotational velocity). These sensors are made up of Micro Electromechanical Systems (\href{https://en.wikipedia.org/wiki/Microelectromechanical_systems}{MEMS}) which are precisely tuned vibrating microstructures in the chip. Forces change the frequency of these vibrations, and that information is translated into electrical signals. These sensors are commonly used in robotics for measuring the pose (position and orientation) and motion of the robot in space.
         
@@ -47,38 +47,27 @@
             \includegraphics[width = 0.7\textwidth]{img/rp-mpu-6050.png}
             \caption{The MPU-6050 from TDK}
         \end{figure}
-        For this lab we will be interfacing with the MPU-6050 Inertial Measurement Unit. Further information about the section can be found in Section \ref{readwrite}.
+        For this lab we will be interfacing with the MPU-6050 Inertial Measurement Unit. Further information about the section can be found in Section \ref{readwrite}. \\
         
-    \subsection{Simulation}
-        If you are using a simulation instead of the hardware, do not worry.  The steps are exactly the same.  Go to the TinkerCad link and you will notice that the circuit has two Arduinos in it.  One is emulating the features of the IMU, and the other one is taking place of the actual Arduino that will be used to communicate with the IMU.
-        
-        \begin{figure}[ht]
-            \centering
-            \includegraphics[width = 0.7\textwidth]{img/TinkerCadWires.PNG}
-            \caption{The circuit window of TinkerCAD for this project}
-        \end{figure}
-        Since you can't tilt or move the IMU in the simulation, there are 3 knobs to represent the G-forces applied along each cardinal axis. Keeping the knob in the middle of the range represents 0 Gs, and the left-most or right-most rotations represent a negative or positive G-force at the max range. 
-        
-        \begin{figure}[ht]
-            \centering
-            \includegraphics[width = 0.7\textwidth]{img/TinkerCadCode.PNG}
-            \caption{The dropdown which you can use to select your target}
-        \end{figure}
-        
-        The code for both Arduinos exists in the TinkerCAD code window. Arduino 1 is the target you should be writing code for, and Arduino 2 is running code to simulate the MPU-6050. You can switch between targets using the dropdown menu in the top-right corner of the screen. 
-        \\ \\
-        \textbf{NOTE: PLEASE DON'T EDIT THE MPU-6050 CODE TO REDUCE THE LIKELIHOOD OF ERRORS}
+        \clearpage
         
 \section{Materials}
 \begin{itemize}
-	\item \href{https://www.autodesk.com/education/edu-software/overview}{AutoDesk Education Account}
-	\item \href{https://www.tinkercad.com/things/16XnuyNUjCb}{TinkerCAD}
+	\item Firmware training board
+	\item Mini usb cable
+	\item MPU-6050 breakout board
 \end{itemize}
 
 \section{Relevant Information}
     \subsection{MPU-6050} \label{readwrite}
         The MPU-6050 is an Inertial Measurement Unit (\href{https://en.wikipedia.org/wiki/Inertial_measurement_unit}{IMU}) which is mounted to the training board by means of a breakout board (the smaller PCB).  
-        In order to control it, first familiarize yourself with the register map found \href{https://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf}{here}.
+        In order to control it, first familiarize yourself with the register map found \href{https://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf}{here} (click on Section 3 from the Table of Contents).
+        
+        \begin{figure}[ht]
+            \centering
+            \includegraphics[scale = 0.25]{img/imu_breakout.jpg}
+            \caption{Picture of the MPU-6050}
+        \end{figure}
         
         As per the datasheet, communicating with this involves interacting with the internal read/write pointer of the microcontroller. \\
         
@@ -123,7 +112,13 @@
         \end{figure}
         
 \section{Lab Objectives}
+
+    Go to the RoboJackets Github
+    \href{https://github.com/RoboJackets/firmware-training}{here}. Open up \texttt{code} $>$ \texttt{Week4} $>$ \texttt{Week\_ 4\_Template} $>$ \texttt{Week\_4\_Template.ino} in the Arudino IDE. 
+
     \subsection{Task 1 - Get the IMU to turn on}
+    
+        In \texttt{Week\_4\_Template.ino}, look at the end of the \texttt{setup()} function.
 
         \begin{enumerate}
             \item Set the IMU to 'Awake' by writing 0 to \texttt{PWR\_MGMT\_1}
@@ -141,6 +136,9 @@
         \end{enumerate}
 
     \subsection{Task 2 - Read raw data}\label{Sec2}
+    
+        In \texttt{Week\_4\_Template.ino}, look at the beginning of the \texttt{loop()} function.
+    
         \begin{enumerate}
             \item We would like to read the X, Y, and Z accelerations from the IMU, so we must request these values from the sensor with \texttt{Wire.requestFrom()}.
             \begin{itemize}
@@ -159,14 +157,13 @@
                 \item Data usually comes in units of least significant bits (LSBs), which are divisions of the Full-Scale Range into $2^{BIT\_DEPTH}$ number of divisions.
                 \item The \texttt{AFS\_SEL} register changes the Full-Scale range of the sensor and thus sets the conversion factor between LSBs and Gs.
             \end{itemize}
-            \item Print the resulting G-Force values to the console to make sure they are reasonable.
-            \begin{itemize}
-                \item If you have the board, place it stationary and flat on the table, \texttt{x\_g} and \texttt{y\_g} should be close to 0, and \texttt{z\_g} should be close to 1.
-                \item If you do not have a board, adjust the potentiometer to make sure the range is what you expect.
-            \end{itemize}
+            \item Print the resulting G-Force values to the console to make sure they are reasonable. If you have the board, place it stationary and flat on the table, \texttt{x\_g} and \texttt{y\_g} should be close to 0, and \texttt{z\_g} should be close to 1.
         \end{enumerate}
         
     \subsection{Task 3 - Use acceleration data to light up LEDs}
+    
+        In \texttt{Week\_4\_Template.ino}, look at the end of the \texttt{loop()} function.
+    
         \begin{enumerate}
             \item Instantiate a struct to hold the acceleration vector.
             \begin{itemize}
@@ -177,16 +174,16 @@
             \begin{itemize}
                 \item A method, \texttt{setBubbleIndicator(tb::Vector3D vector)}, is also provided for you.
                 \item Pass the \texttt{tb::Vector3D} struct into this method, and your LEDs should light up corresponding to the angle. 
-                \item NOTE: If you are using the simulator, this step will only work if you set the y-axis acceleration to 0 and set the z axis acceleration to 1G (about half the positive range).
             \end{itemize}
         \end{enumerate}
     
 
 \section{Troubleshooting}
-    \subsection{Solutions}
-    We have included the solutions below if you do not complete the lab during the session or if you want to verify your answer. If you need help during the lab ask an instructor!
-\begin{itemize}
-    \item \href{https://www.tinkercad.com/things/lFJojnkgwTw}{TinkerCAD Solution}
+    \begin{itemize}
+        \item Remember to use the \texttt{\#define} macros, especially when referring to device addresses. Don't re-invent the wheel!
+        \item If you don't see any input/output from the IMU, remember to use \texttt{Wire.beginTransmission()} and \\ \texttt{Wire.endTransmission()} when sending and \texttt{Wire.requestFrom()} when receiving.
+        \item By default, the \texttt{AFS\_SEL} register has a value of 0; you can see what value this corresponds to on page 30 of the IMU documentation. You can use the \texttt{SCALE\_FACTOR\_2G} macro to scale the IMU outputs by the proper amount.
+        
     \end{itemize}
     
     \section{Egg}
