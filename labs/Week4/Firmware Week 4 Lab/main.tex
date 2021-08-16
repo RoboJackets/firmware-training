@@ -51,6 +51,31 @@
         
         \clearpage
         
+    \subsection{Simulation}
+    
+        \textbf{NOTE: THIS IS ONLY RELEVANT IF YOU ARE USING THE ONLINE SIMULATOR TINKERCAD!} \par 
+        
+        If you are using a simulation instead of the hardware, do not worry.  The steps are exactly the same.  Go to the TinkerCad link and you will notice that the circuit has two Arduinos in it.  One is emulating the features of the IMU, and the other one is taking place of the actual Arduino that will be used to communicate with the IMU.
+        
+        \begin{figure}[ht]
+            \centering
+            \includegraphics[width = 0.7\textwidth]{img/TinkerCadWires.PNG}
+            \caption{The circuit window of TinkerCAD for this project}
+        \end{figure}
+        Since you can't tilt or move the IMU in the simulation, there are 3 knobs to represent the G-forces applied along each cardinal axis. Keeping the knob in the middle of the range represents 0 Gs, and the left-most or right-most rotations represent a negative or positive G-force at the max range. 
+        
+        \begin{figure}[ht]
+            \centering
+            \includegraphics[width = 0.7\textwidth]{img/TinkerCadCode.PNG}
+            \caption{The dropdown which you can use to select your target}
+        \end{figure}
+        
+        The code for both Arduinos exists in the TinkerCAD code window. Arduino 1 is the target you should be writing code for, and Arduino 2 is running code to simulate the MPU-6050. You can switch between targets using the dropdown menu in the top-right corner of the screen. 
+        \\ \\
+        \textbf{NOTE: PLEASE DON'T EDIT THE MPU-6050 CODE TO REDUCE THE LIKELIHOOD OF ERRORS}
+        
+        \clearpage
+        
 \section{Materials}
 \begin{itemize}
 	\item Firmware training board
