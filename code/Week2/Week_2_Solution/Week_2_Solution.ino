@@ -16,7 +16,7 @@
 int pinArray[5] = {D1_PIN, D2_PIN, D3_PIN, D4_PIN, D5_PIN};
 
 // Stores the state machine state and sets initial state
-volatile int8_t state = 1;
+volatile int8_t state = 0;
 
 void setup()
 {
