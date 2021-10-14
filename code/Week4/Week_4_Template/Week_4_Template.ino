@@ -46,7 +46,7 @@ namespace tb
 
   void setBubbleIndicator(tb::Vector3D vector)
   {
-    float angle = atan2f(vector.x_g, vector.z_g);
+    float angle = atan2f(vector.y_g, vector.z_g);
     int pinPos = -1;
 
     // Checks if angle of vector is in valid range
