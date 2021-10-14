@@ -46,9 +46,9 @@ void loop()
 // INTERRUPT
 // Here write the ISR linked to the SW1 button
 void LED_INT() {
-  light_value += 25;
+  light_value += 17;
   
-  if (light_value > 255) {
+  if (light_value >= 255) {
     light_value = 0;
   }
   
