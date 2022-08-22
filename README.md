@@ -15,7 +15,7 @@ Welcome to the RoboJackets Firmware training repository!
 Here is a breakdown of what firmware training is week-to-week:
 * Week 0: Introductions, Electrical Basics*
 * Week 1: Introduction to Prototyping and Arduino*
-* Week 2: More C and Interrupts
+* Week 2: More C++ and Interrupts
 * Week 3: PWM and Bitwise Operations
 * Week 4: Communication Protocols
 * Week 5: Debugging and Soldering*
@@ -33,12 +33,12 @@ it wouldn't hurt to familiarize yourself with the repository in advance.
 
 ```presentations/```: A pdf version of the lecture slides. Feel free to look at them beforehand.
 
-```demos/```: ```.ipynb``` files used for the interactive C++ portion of the lecture. To use these, download the template from this repository. Then click on the [Binder Link](https://mybinder.org/v2/gh/QuantStack/xeus-cling/4b06e191fa6efe6850f024f583ade3824b7ea5e2). Once it loads, find the 'Upload File' button, and upload the file you downloaded. Then, click on the file in the file browser to open it up.
+```demos/```: ```.ipynb``` files used for the interactive C++ portion of the lecture. To use these, download the template from this repository. Then click on the [Binder Link](https://mybinder.org/v2/gh/jupyter-xeus/xeus-cling/stable). Once it loads, find the 'Upload File' button, and upload the file you downloaded. Then, click on the file in the file browser to open it up.
 
 ## Additional Resources
 
 [Arduino IDE Installation Instructions](code/README.md)
 
-[Binder Link](https://mybinder.org/v2/gh/QuantStack/xeus-cling/4b06e191fa6efe6850f024f583ade3824b7ea5e2)
+[Binder Link](https://mybinder.org/v2/gh/jupyter-xeus/xeus-cling/stable)
 
 
