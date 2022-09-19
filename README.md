@@ -8,8 +8,8 @@ Welcome to the RoboJackets Firmware training repository!
 
 ## Training Schedule 2022
 
-* Location: Skiles, (room still tba)
-* Time: 7:00pm - 9:00pm on Mondays and Wednesdays
+* Location: Skiles
+* Time: 6:30pm - 8:00pm on Mondays and Wednesdays
 * Bring: Your computer
 
 Here is a breakdown of what firmware training is week-to-week:
