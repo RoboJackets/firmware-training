@@ -33,12 +33,12 @@ it wouldn't hurt to familiarize yourself with the repository in advance.
 
 ```presentations/```: A pdf version of the lecture slides. Feel free to look at them beforehand.
 
-```demos/```: ```.ipynb``` files used for the interactive C++ portion of the lecture. To use these, download the template from this repository. Then click on the [Binder Link](https://mybinder.org/v2/gh/jupyter-xeus/xeus-cling/stable). Once it loads, find the 'Upload File' button, and upload the file you downloaded. Then, click on the file in the file browser to open it up.
+```demos/```: ```.ipynb``` files used for the interactive C++ portion of the lecture. Open these in [Google Colab](https://colab.research.google.com/). 
 
 ## Additional Resources
 
 [Arduino IDE Installation Instructions](code/README.md)
 
-[Binder Link](https://mybinder.org/v2/gh/jupyter-xeus/xeus-cling/stable)
+[Google Colab](https://colab.research.google.com/)
 
 
