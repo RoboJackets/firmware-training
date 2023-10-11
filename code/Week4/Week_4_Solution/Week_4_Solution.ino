@@ -167,5 +167,5 @@ void loop()
   tb::setBubbleIndicator(currentSample);
   
   // A delay of 100ms so we do not sample or print too fast
-  delay(100);
+  delay(1000);
 }
