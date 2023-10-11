@@ -7,11 +7,14 @@
 
 namespace tilt_sensor {
 
-  struct AccelVector {
+  struct _AccelVector {
     float x;
     float y;
     float z;
   };
+  typedef _AccelVector AccelVector;
+
+  void printVector(AccelVector vector);
 
   class BubbleIndicator {
   public:
@@ -41,6 +44,7 @@ namespace tilt_sensor {
     IMU();
     bool initIMU();
     AccelVector getMeasurement();
+    int getID();
   private:
     const char MPU_ADDR = 0x68;
     const char PWR_MGMT_1 = 0x6B;
@@ -52,8 +56,9 @@ namespace tilt_sensor {
     const char ACCEL_ZOUT_H = 0x3F;
     const char ACCEL_ZOUT_L = 0x40;
     const char ACCEL_CONFIG = 0x1C;
+    const float SCALE_FACTOR_2G = 16384.0;
   
-    void readConsecutiveBytes(char addr, int len, char *const buffer);
+    void readConsecutiveBytes(char addr, int len, char *buffer);
     void writeByte(char addr, char data);
   };
 

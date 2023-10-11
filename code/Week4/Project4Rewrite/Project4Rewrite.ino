@@ -1,10 +1,15 @@
 #include "TiltSensor.h"
+#include "Wire.h"
+
+tilt_sensor::BubbleIndicator bubbleIndicator;
+tilt_sensor::IMU imu;
+
+bool value;
 
 void setup() {
+  // Begin i2c
+  Wire.begin();
   Serial.begin(9600);
-
-  tilt_sensor::BubbleIndicator bubbleIndicator;
-  tilt_sensor::IMU imu;
   
   bubbleIndicator.initIndicator();
   imu.initIMU();
@@ -12,6 +17,6 @@ void setup() {
 
 void loop() {
   tilt_sensor::AccelVector vector = imu.getMeasurement();
-  bubbleIndicator.updateIndicator(vector);
-  delay(100);
+  tilt_sensor::printVector(vector);
+  delay(1000);
 }
