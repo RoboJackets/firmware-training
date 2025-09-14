@@ -22,8 +22,6 @@
 
 #include <Arduino.h>
 
-#define LED_PIN 13
-
 void setup() {
   
 }
