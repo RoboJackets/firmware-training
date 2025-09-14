@@ -1,0 +1,3 @@
+[wokwi]
+vesrion = 1
+firmware = '.pio/build/nanoatmega168/firmware.hex'
