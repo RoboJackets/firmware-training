@@ -4,7 +4,7 @@
 
 Welcome to the RoboJackets Firmware training repository!
 
-## Training Schedule 2022
+## Training Schedule 2025
 
 * Location: Mason 3132 (Except for 9/15 (Howey N210))
 * Time: 6:00pm - 8:00pm on Mondays or Fridays
