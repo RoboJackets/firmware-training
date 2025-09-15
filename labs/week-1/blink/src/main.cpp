@@ -22,20 +22,10 @@
 
 #include <Arduino.h>
 
-#define PINS 5
-uint8_t pins[PINS] = {11, 10, 9, 6, 5};
-
 void setup() {
-    for (int i = 0; i < PINS; i++) {
-        pinMode(pins[i], OUTPUT);
-    }
+
 }
 
 void loop() {
-    for (int i = 0; i < PINS; i++) {
-        digitalWrite(pins[i], HIGH);
-        delay(500);
-        digitalWrite(pins[i], LOW);
-        delay(500);
-    }
+
 }
