@@ -22,10 +22,39 @@
 
 #include <Arduino.h>
 
-void setup() {
+#define LED_PIN 13
 
+uint8_t external_leds[] = {11, 10, 9, 3, 2};
+size_t counter = 0;
+
+void setup() {
+    // Set pinMode of the onboard led so it can be used as an output
+    pinMode(LED_PIN, OUTPUT);
+
+    // Set the pinMode of each of the external leds so they can
+    // be used as outputs
+    for (size_t i = 0; i < 5; i++) {
+        pinMode(external_leds[i], OUTPUT);
+    }
 }
 
 void loop() {
+    // Turn on the onboard led
+    digitalWrite(LED_PIN, HIGH);
+    // Turn on one of the external leds
+    digitalWrite(external_leds[counter], HIGH);
 
+    // Wait 500 milliseconds
+    delay(500);
+
+    // Turn off the onboard led
+    digitalWrite(LED_PIN, LOW);
+    // Turn off one of the external leds
+    digitalWrite(external_leds[counter], LOW);
+
+    // Wait 500 milliseconds
+    delay(500);
+
+    // Increment the counter
+    counter = (counter + 1) % 5;
 }
