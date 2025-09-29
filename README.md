@@ -29,6 +29,22 @@ In week 1, we will be learning what firmware is and what you can do with it.  Ad
 
 For week 1, there is one lab, [blink](./labs/week-1/blink/).  Blink is the classic "Hello World" of the Arduino world.  In this lab, you will be learning how to interface with the Arduino Nano to blink the onboard led.
 
+## Week 2
+
+In week 2, we will be learning about control flow, digital inputs, and analog IO.
+
+### Labs
+
+For week 2, there are three labs, [switch-buttons](./labs/week-2/switch-buttons), [pwm](./labs/week-2/pwm), and [potentiometer-control](./labs/week-2/potentiometer-control).  Switch buttons teaches how to read digital inputs and use interrupts.  PWM teaches the basics of manually generating pwm signals.  Potentiometer control teaches how to control the value of analog outputs via an analog input.
+
+## Week 3
+
+In week 3, we will be learning about common communication protocols used in embedded systems.
+
+### Labs
+
+For week 3, there are two labs, [serial-control](./labs/week-3/serial-control) and [i2c-imu](./labs/week-3/i2c-imu).  Serial Control details how you can use the serial interface on the Arduino to debug and control the peripherals connected to the training board.  I2C IMU shows how to use a library to read values from the IMU over i2c and how you can use this to make a simple shake on/off switch.
+
 
 ## Additional Resources
 
