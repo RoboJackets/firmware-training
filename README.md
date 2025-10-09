@@ -45,6 +45,14 @@ In week 3, we will be learning about common communication protocols used in embe
 
 For week 3, there are two labs, [serial-control](./labs/week-3/serial-control) and [i2c-imu](./labs/week-3/i2c-imu).  Serial Control details how you can use the serial interface on the Arduino to debug and control the peripherals connected to the training board.  I2C IMU shows how to use a library to read values from the IMU over i2c and how you can use this to make a simple shake on/off switch.
 
+## Week 4
+
+In week 4, we will be learning about how to design and create drivers to work with peripheral devices.
+
+### Labs
+
+For week 4, there is one lab, [imu-driver-design](./labs/week-4/imu-driver-design).  This lab has you create a driver for the MPU6050 IMU connected to the firmware training board.  It also contains the code to complete week-3 lab 2 as a test for your IMU driver.
+
 
 ## Additional Resources
 
