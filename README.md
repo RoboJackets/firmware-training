@@ -15,7 +15,7 @@ Here is a breakdown of what firmware training is week-to-week:
 * Week 2: Analog IO + Interrupts
 * Week 3: Communication Protocols
 * Week 4: Driver Design
-* Week 5: Recap + Special Topics
+* Week 5: State Machines + RTOSes
 
 ## About this Repository
 
@@ -52,6 +52,14 @@ In week 4, we will be learning about how to design and create drivers to work wi
 ### Labs
 
 For week 4, there is one lab, [imu-driver-design](./labs/week-4/imu-driver-design).  This lab has you create a driver for the MPU6050 IMU connected to the firmware training board.  It also contains the code to complete week-3 lab 2 as a test for your IMU driver.
+
+## Week 5
+
+In week 5, we will be learning about state machines and I'll teach a little bit about real time operating systems.
+
+### Labs
+
+For week 5, there is only one lab, [state-machines](./labs/week-5/state-machines).  This lab has you creating a combination lock using inputs on the training board.
 
 
 ## Additional Resources
