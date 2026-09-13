@@ -4,7 +4,7 @@
 
 Welcome to the RoboJackets Firmware training repository!
 
-## Training Schedule 2025
+## Training Schedule 2026
 
 * Location: Skiles 271 (Except for 9/18 (Skiles 171))
 * Time: 6:00pm - 8:00pm on Thursdays or Fridays
