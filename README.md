@@ -13,10 +13,10 @@ Welcome to the RoboJackets Firmware training repository!
 Here is a breakdown of what firmware training is week-to-week:
 * Week 1: What is firmware? General Arduino + Digital IO
 * Week 2: Analog IO + Interrupts
-* Week 3: Hive Soldering Training
-* Week 4: Communication Protocols
-* Week 5: Driver Design
-* Week 6: State Machines + RTOSes
+* Special!: Hive Soldering Training
+* Week 3: Communication Protocols
+* Week 4: Driver Design
+* Week 5: State Machines + RTOSes
 
 ## About this Repository
 
