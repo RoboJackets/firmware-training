@@ -23,9 +23,13 @@
 #include <Arduino.h>
 
 void setup() {
-
+  // Initialize digital pin LED_BUILTIN as an output
+  pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop() {
-
+  digitalWrite(LED_BUILTIN, HIGH);   // Turn LED on
+  delay(100);                       // Wait 500 ms
+  digitalWrite(LED_BUILTIN, LOW);    // Turn LED off
+  delay(100);                       // Wait 500 ms
 }

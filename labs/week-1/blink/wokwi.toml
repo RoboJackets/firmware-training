@@ -1,3 +1,4 @@
 [wokwi]
 vesrion = 1
 firmware = '.pio/build/nanoatmega328new/firmware.hex'
+elf = ".pio/build/nanoatmega328new/firmware.elf"
