@@ -4,15 +4,16 @@
 
 Welcome to the RoboJackets Firmware training repository!
 
-## Training Schedule 2025
+## Training Schedule 2026
 
-* Location: Mason 3132 (Except for 9/15 (Howey N210))
-* Time: 6:00pm - 8:00pm on Mondays or Fridays
+* Location: Skiles 271 (Except for 9/18 (Skiles 171))
+* Time: 6:00pm - 8:00pm on Thursdays or Fridays
 * Bring: Your computer
 
 Here is a breakdown of what firmware training is week-to-week:
 * Week 1: What is firmware? General Arduino + Digital IO
 * Week 2: Analog IO + Interrupts
+* Special!: Hive Soldering Training
 * Week 3: Communication Protocols
 * Week 4: Driver Design
 * Week 5: State Machines + RTOSes

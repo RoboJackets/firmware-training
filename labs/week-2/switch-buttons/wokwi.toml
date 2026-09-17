@@ -1,3 +1,0 @@
-[wokwi]
-version = 1
-firmware = '.pio/build/nanoatmega328new/firmware.hex'
