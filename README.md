@@ -14,7 +14,7 @@ Here is a breakdown of what we'll be going over each week-to-week:
 * Week 1: What is firmware? General Arduino + Digital IO
 * Week 2: Analog IO + Interrupts
 * Week 3: Communication Protocols
-* Week 4: Driver Design
+* Week 4: Driver Development
 * Week 5: State Machines + RTOSes
 * Week 6: STM32 Fundamentals
 * Week 7: STM32 Peripherals
@@ -64,11 +64,17 @@ In week 5, we will be learning about state machines and I'll teach a little bit 
 
 For week 5, there is only one lab, [state-machines](./labs/week-5/state-machines).  This lab has you creating a combination lock using inputs on the training board.
 
-## Week 6 (10/26)
+## Week 6 (11/2)
 
-## Week 7 (10/26)
+Coming soon
 
-## Week 8 (10/26)
+## Week 7 (11/9)
+
+Coming soon
+
+## Week 8 (11/16)
+
+Coming soon
 
 
 ## Additional Resources
