@@ -25,10 +25,42 @@
 
 #include <Arduino.h>
 
-void setup() {
+#define SW1 2
+#define LED1 11
 
+#define SW2 3
+#define LED2 10
+
+void button_two_released();
+
+void button_two_pressed() {
+  digitalWrite(LED2, LOW);
+  detachInterrupt(digitalPinToInterrupt(SW2));
+  attachInterrupt(digitalPinToInterrupt(SW2), button_two_released, RISING);
+}
+
+void button_two_released() {
+  digitalWrite(LED2, HIGH);
+  detachInterrupt(digitalPinToInterrupt(SW2));
+  attachInterrupt(digitalPinToInterrupt(SW2), button_two_pressed, FALLING);
+}
+
+void setup() {
+  pinMode(SW1, INPUT);
+  pinMode(LED1, OUTPUT);
+  pinMode(SW2, INPUT);
+  pinMode(LED2, OUTPUT);
+
+  digitalWrite(LED1, LOW);
+  digitalWrite(LED2, HIGH);
+
+  attachInterrupt(digitalPinToInterrupt(SW2), button_two_pressed, FALLING);
 }
 
 void loop() {
-  
+  if (digitalRead(SW1)) {
+    digitalWrite(LED1, HIGH);
+  } else {
+    digitalWrite(LED1, LOW);
+  }
 }

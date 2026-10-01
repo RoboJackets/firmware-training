@@ -16,10 +16,48 @@
 
 #include <Arduino.h>
 
-void setup() {
+#define LED1 11
+#define LED2 10
 
+#define PERIOD 1000
+
+void setup() {
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
 }
 
 void loop() {
-  
+  // 0.25 PWM
+  analogWrite(LED2, 255 / 4);
+  for (size_t i = 0; i < 1000; i++) {
+    digitalWrite(LED1, HIGH);
+    delayMicroseconds(250);
+    digitalWrite(LED1, LOW);
+    delayMicroseconds(750);
+  }
+
+  // 0.5 PWM
+  analogWrite(LED2, 255 / 2);
+  for (size_t i = 0; i < 1000; i++) {
+    digitalWrite(LED1, HIGH);
+    delayMicroseconds(500);
+    digitalWrite(LED1, LOW);
+    delayMicroseconds(500);
+  }
+
+  // 0.75 PWM
+  analogWrite(LED2, 3 * 255 / 4);
+  for (size_t i = 0; i < 1000; i++) {
+    digitalWrite(LED1, HIGH);
+    delayMicroseconds(750);
+    digitalWrite(LED1, LOW);
+    delayMicroseconds(250);
+  }
+
+  // 1.0 PWM
+  analogWrite(LED2, 255);
+  for (size_t i = 0; i < 1000; i++) {
+    digitalWrite(LED1, HIGH);
+    delayMicroseconds(1000);
+  }
 }

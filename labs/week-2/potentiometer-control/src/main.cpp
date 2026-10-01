@@ -11,10 +11,15 @@
 
 #include <Arduino.h>
 
-void setup() {
+#define SIG A5
+#define LED 11
 
+void setup() {
+  pinMode(SIG, INPUT);
+  pinMode(LED, OUTPUT);
 }
 
 void loop() {
-  
+  uint32_t value = analogRead(SIG);
+  analogWrite(LED, value / 4);
 }
