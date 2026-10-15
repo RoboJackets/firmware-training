@@ -29,10 +29,44 @@
 
 #include <Arduino.h>
 
-void setup() {
+uint8_t led_pins[5] = { 11, 10, 9, 6, 5 };
 
+uint8_t command[10] = {};
+
+void setup() {
+  Serial.begin(9600);
+  for (size_t i = 0; i < 5; i++) {
+    pinMode(led_pins[i], OUTPUT);
+  }
 }
 
 void loop() {
+  if (Serial.available()) {
+    size_t num_bytes = Serial.readBytesUntil('\n', command, 10);
+    for (size_t i = 0; i < num_bytes; i++) {
+      Serial.print((char) command[i]);
+    }
+    Serial.print("\n");
 
+    if (num_bytes >= 4 && command[0] == 'D') {
+      uint8_t pin;
+      pin = command[1] - 48;
+      Serial.print("Pin: ");
+      Serial.println(pin);
+
+      if (pin > 5) {
+        return;
+      }
+
+      uint8_t value;
+      value = (command[3] - 48) * 100 +
+        (command[4] - 48) * 10 +
+        (command[5] - 48);
+
+      Serial.print("Value: ");
+      Serial.println(value);
+
+      analogWrite(led_pins[pin - 1], value);
+    }
+  }
 }

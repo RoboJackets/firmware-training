@@ -25,10 +25,55 @@
 #include <Wire.h>
 #include <Adafruit_MPU6050.h>
 
-void setup() {
+#define D1 11
 
+Adafruit_MPU6050 mpu;
+
+uint8_t led_state = LOW;
+
+bool high_velocity = false;
+double velocity_cutoff = 0.2;
+
+size_t speeds_idx = 0;
+double speeds[20] = {0.0};
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(D1, OUTPUT);
+  digitalWrite(D1, LOW);
+  if (!mpu.begin()) {
+    while (1) {
+      Serial.println("Failed to find MPU6050 Chip");
+      delay(1000);
+    }
+  }
 }
 
 void loop() {
+  sensors_event_t a, g, temp;
+  mpu.getEvent(&a, &g, &temp);
 
+  double speed = sqrt(square(g.gyro.x) + square(g.gyro.y) + square(g.gyro.z));
+  speeds[speeds_idx] = speed;
+
+  double average_speed = 0.0;
+  for (size_t i = 0; i < 20; i++) {
+    average_speed += speeds[i];
+  }
+  average_speed /= 20;
+
+  if (high_velocity && average_speed < velocity_cutoff) {
+    high_velocity = false;
+    if (led_state == LOW) {
+      digitalWrite(D1, HIGH);
+      led_state = HIGH;
+    } else {
+      digitalWrite(D1, LOW);
+      led_state = LOW;
+    }
+  } else if (!high_velocity && average_speed > velocity_cutoff) {
+    high_velocity = true;
+  }
+
+  delay(100);
 }
