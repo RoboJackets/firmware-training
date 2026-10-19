@@ -17,43 +17,43 @@
 
 // What is the address for the IMU connected to your Arduino (check the datasheet)
 // <TODO>
-#define IMU_ADDRESS 0x00
+#define IMU_ADDRESS 0b1101000
 
 // The configuration register
 // <TODO>
-#define CONFIGURATION 0x00
+#define CONFIGURATION 0x1A
 // The gyroscope configuration register
 // <TODO>
-#define GYROSCOPE_CONFIGURATION 0x00
+#define GYROSCOPE_CONFIGURATION 0x1B
 // The gyroscope X High Byte Register
 // <TODO>
-#define GYRO_X_HI 0x00
+#define GYRO_X_HI 0x43
 // The gyroscope Low Byte Register
 // <TODO>
-#define GYRO_X_LO 0x00
+#define GYRO_X_LO 0x44
 // The gyroscope Y High Byte Register
 // <TODO>
-#define GYRO_Y_HI 0x00
+#define GYRO_Y_HI 0x45
 // The gyroscope Y Low Byte Register
 // <TODO>
-#define GYRO_Y_LO 0x00
+#define GYRO_Y_LO 0x46
 // The gyroscope Z High Byte Register
 // <TODO>
-#define GYRO_Z_HI 0x00
+#define GYRO_Z_HI 0x47
 // The gyroscope Z Low Byte Register
 // <TODO>
-#define GYRO_Z_LO 0x00
+#define GYRO_Z_LO 0x48
 // The first power management register
 // <TODO>
-#define PWR_MGMT_1 0x00
+#define PWR_MGMT_1 0x6B
 
 // The register the who-am-i information is kept in
 // <TODO>
-#define WHO_AM_I_REGISTER 0x00
+#define WHO_AM_I_REGISTER 0x75
 // The value in the WHO_AM_I register (always use this to make sure you are talking to
 // the correct device)
 // <TODO>
-#define WHO_AM_I 0x00
+#define WHO_AM_I 0x68
 
 // Error from operating the IMU.
 // 
@@ -61,18 +61,42 @@
 enum ImuError {
     // No error occurred
     NO_ERROR = 0,
+    // The whoami value returned from the IMU was incorrect
+    INVALID_WHOAMI = 1,
+    // I2C Communication Failed (likely something is unplugged)
+    I2C_FAILED = 2,
 };
 
 // The various digial low-pass filter options for initializing the IMU (check page 13 of the register map)
 // <TODO>
 enum LowPassFilter {
-    NOT_IMPLEMENTED = 0,
+    // 256 Hz at 0.98 ms
+    CFG0 = 0,
+    // 188 Hz at 1.9 ms
+    CFG1 = 1,
+    // 98 Hz at 2.8 ms
+    CFG2 = 2,
+    // 42 Hz at 4.8 ms
+    CFG3 = 3,
+    // 20 Hz at 8.3 ms
+    CFG4 = 4,
+    // 10 Hz at 13.4 ms
+    CFG5 = 5,
+    // 5 Hz at 18.6 ms
+    CFG6 = 6,
 };
 
 // The full sacle options for the gyroscope outputs (check page 14 of the register map document)
 // <TODO>
 enum FullScaleSelect {
-    NOT_IMPLEMENTED = 0,
+    // +- 250 degrees / second
+    FS0,
+    // +- 500 degrees / second
+    FS1,
+    // +- 1000 degrees / second
+    FS2,
+    // +- 2000 degrees / second
+    FS3,
 };
 
 // A struct containing the gyrometer data coming from the Imu

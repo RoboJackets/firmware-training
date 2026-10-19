@@ -4,7 +4,7 @@
  * will only initialize the IMU and read the gyroscope values.
  * 
  * For this lab, you will likely not need to change a lot of the code in
- * main.cpp, and most of your code will be in lib/imu/imu.hpp and lib/imu/imu.cpp.
+ * main.cpp, and most of your code will be in include/imu.hpp and src/imu.cpp.
  * 
  * In imu.hpp, I have indicated all necessary items with <TODO> so you know
  * where you will be modifying code.
@@ -49,7 +49,7 @@ void setup() {
   // Setup the IMU
   imu = Imu(IMU_ADDRESS);
   // <TODO>: Change the low pass and full scale select filter values
-  if (imu.begin(LowPassFilter::NOT_IMPLEMENTED, FullScaleSelect::NOT_IMPLEMENTED) != ImuError::NO_ERROR) {
+  if (imu.begin(LowPassFilter::CFG2, FullScaleSelect::FS3) != ImuError::NO_ERROR) {
     while (1) {
       Serial.println("Error Initializing IMU...");
       delay(500);
@@ -66,6 +66,7 @@ void loop() {
   Serial.print(speed);
   Serial.print("\n");
   speed_buffer[speed_idx] = speed;
+  speed_idx = (speed_idx + 1) % 20;
 
   double average_speed = 0.0;
   for (size_t i = 0; i < 20; i++) {
