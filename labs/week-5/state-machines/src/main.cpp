@@ -29,10 +29,117 @@
 
 #include <Arduino.h>
 
-void setup() {
 
+#define BTN0 2
+#define BTN1 3
+
+enum class LockStates : uint8_t {
+    Locked = 0,
+    FirstCode,
+    SecondCode,
+    ThirdCode,
+    FourthCode,
+    Unlocked
+};
+
+void btn_ISR();
+
+uint8_t LEDS[5] = {5, 6, 9, 10, 11};
+
+uint8_t combo[5] = {1, 2, 2, 1, 1};
+
+LockStates state = LockStates::Locked;
+
+uint32_t last_press = 0;
+uint8_t last_btns = 0;
+volatile uint8_t btns = 0;
+
+void setup() {
+    Serial.begin(9600);
+    Serial.println("Hello World!");
+
+    attachInterrupt(digitalPinToInterrupt(BTN0), btn_ISR, CHANGE);
+    attachInterrupt(digitalPinToInterrupt(BTN1), btn_ISR, CHANGE);
+
+    for (auto led : LEDS) {
+        pinMode(led, OUTPUT);
+    }
 }
 
 void loop() {
+    Serial.print("Button States: ");
+    Serial.println(btns);
 
+    for (auto led : LEDS) {
+        digitalWrite(led, LOW);
+    }
+
+    switch (state) {
+        case LockStates::Locked:
+            if (btns == combo[0]) {
+                state = LockStates::FirstCode;
+            } else if (btns != 0) {
+                state = LockStates::Locked;
+            }
+        break;
+        case LockStates::FirstCode:
+            if (btns == combo[1]) {
+                state = LockStates::SecondCode;
+            } else if (btns != 0) {
+                state = LockStates::Locked;
+            }
+
+            digitalWrite(LEDS[0], HIGH);
+        break;
+        case LockStates::SecondCode:
+            if (btns == combo[2]) {
+                state = LockStates::ThirdCode;
+            } else if (btns != 0) {
+                state = LockStates::Locked;
+            }
+
+            digitalWrite(LEDS[1], HIGH);
+        break;
+        case LockStates::ThirdCode:
+            if (btns == combo[3]) {
+                state = LockStates::FourthCode;
+            } else if (btns != 0) {
+                state = LockStates::Locked;
+            }
+
+            digitalWrite(LEDS[2], HIGH);
+        break;
+        case LockStates::FourthCode:
+            if (btns == combo[4]) {
+                state = LockStates::Unlocked;
+            } else if (btns != 0) {
+                state = LockStates::Locked;
+            }
+
+            digitalWrite(LEDS[3], HIGH);
+        break;
+        case LockStates::Unlocked:
+            if (btns != 0) {
+                state = LockStates::Locked;
+            }
+            for (auto led : LEDS) {
+                digitalWrite(led, HIGH);
+            }
+        break;
+        default:
+        break;
+    }
+
+    btns = 0;
+}
+
+
+
+void btn_ISR() {
+    if (last_press < millis() - 200) {
+        btns = (digitalRead(BTN0) & 0b1) | (!digitalRead(BTN1) & 0b1) << 1;
+        if (last_btns != btns) {
+            last_press = millis();
+        }
+    }
 }
